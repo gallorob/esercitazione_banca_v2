@@ -1,3 +1,5 @@
+import Bancav2.conti.TipoConto;
+
 public class Tester {
 
     public static void main(String[] args) {

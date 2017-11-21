@@ -8,7 +8,7 @@ public class ContoWeb extends ContoCorrente {
     }
 
     public boolean changePW(String newPW) {
-        if(!pwModificata && newPW != "") {
+        if(!pwModificata && !(newPW.equals(""))) {
             this.pw = newPW;
             this.pwModificata = true;
             return true;
@@ -18,22 +18,11 @@ public class ContoWeb extends ContoCorrente {
     }
 
     private boolean login(String pw) {
-        if(pwModificata) {
-            if (pw.equals(this.pw)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return false;
+        return pwModificata && pw.equals(this.pw);
     }
 
     public boolean operazione(double amount, String pw) {
-        if (this.login(pw)) {
-            return super.operazione(amount);
-        } else {
-            return false;
-        }
+        return this.login(pw) && super.operazione(amount);
     }
 
     @Override

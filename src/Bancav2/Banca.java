@@ -1,4 +1,6 @@
-import java.net.CookieHandler;
+import Bancav2.conti.*;
+import Bancav2.accountable.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,24 +51,17 @@ public class Banca {
 
     public boolean operazione(String iban, double amount) {
         Conto tmp = conti.get(iban);
-        if(tmp instanceof ContoWeb) return false;
-        else return tmp.operazione(amount);
+        return !(tmp instanceof ContoWeb) && tmp.operazione(amount);
     }
 
     public boolean operazione(String iban, double amount, String pw) {
-        Conto a = conti.get(iban);
-        if(a instanceof ContoWeb) {
-            return ((ContoWeb) a).operazione(amount, pw);
-        }
-        else return false;
+        Conto tmp = conti.get(iban);
+        return tmp instanceof ContoWeb && ((ContoWeb) tmp).operazione(amount, pw);
     }
 
     public boolean changePW(String iban, String pw) {
-        Conto a = conti.get(iban);
-        if(a instanceof ContoWeb) {
-            return ((ContoWeb) a).changePW(pw);
-        }
-        else return false;
+        Conto tmp = conti.get(iban);
+        return tmp instanceof ContoWeb && ((ContoWeb) tmp).changePW(pw);
     }
 
 }

@@ -6,11 +6,7 @@ public class ContoDeposito extends ContoCorrente {
 
     @Override
     public boolean operazione(double amount) {
-        if(amount >= 0) {
-            return super.operazione(amount);
-        } else {
-            return false;
-        }
+        return amount >= 0 && super.operazione(amount);
     }
 
     @Override
