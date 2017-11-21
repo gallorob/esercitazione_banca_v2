@@ -1,3 +1,5 @@
+package Bancav2.conti;
+
 public class ContoDeposito extends ContoCorrente {
 
     public ContoDeposito(String cf, String iban) {
@@ -11,7 +13,7 @@ public class ContoDeposito extends ContoCorrente {
 
     @Override
     public String toString() {
-        return ("Conto Deposito; CF: " + this.getCf() + ";  IBAN: " + this.getIban() + "; Saldo: " + this.getSaldo());
+        return ("Bancav2.conti.Conto Deposito; CF: " + this.getCf() + ";  IBAN: " + this.getIban() + "; Saldo: " + this.getSaldo());
     }
 
 }

@@ -1,3 +1,6 @@
+package Bancav2;
+
+import Bancav2.accountable.TipoAccountable;
 import Bancav2.conti.TipoConto;
 
 public class Tester {
@@ -91,6 +94,34 @@ public class Tester {
         } else System.out.println("Transazione fallita");
         System.out.println(b.saldoConto("IT00000UBI003"));
 
+
+        // Operazioni sugli accountable
+        System.out.println("\n----\nACCOUNTABLES\n----\n");
+
+        // Aggiunta accountables
+        b.addAccountable("IT00000UBI001", TipoAccountable.ACCREDITO, 120);
+        b.addAccountable("IT00000UBI001", TipoAccountable.ADDEBITO, 10);
+        b.addAccountable("IT00000UBI002", TipoAccountable.ACCREDITO, 500);
+        b.addAccountable("IT00000UBI002", TipoAccountable.ADDEBITO, 15);
+        b.addAccountable("IT00000UBI003", TipoAccountable.ACCREDITO, 200);
+        b.addAccountable("IT00000UBI003", TipoAccountable.ADDEBITO, 160);
+
+        // Stampa prima della fine del mese
+        System.out.println("\n----\nDettaglio conti:\n----");
+        System.out.println(b.detConto("IT00000UBI001"));
+        System.out.println(b.detConto("IT00000UBI002"));
+        System.out.println(b.detConto("IT00000UBI003"));
+
+        // Fine del mese
+        if(b.saldoFineMese()) {
+            System.out.println("\n[ESECUZIONE PROCESSI DI FINE MESE COMPIUTA]");
+        } else System.out.println("\n[ESECUZIONE PROCESSI DI FINE MESI FALLITA]");
+
+        // Stampa dopo la fine del mese
+        System.out.println("\n----\nDettaglio conti:\n----");
+        System.out.println(b.detConto("IT00000UBI001"));
+        System.out.println(b.detConto("IT00000UBI002"));
+        System.out.println(b.detConto("IT00000UBI003"));
     }
 
 }

@@ -1,7 +1,10 @@
+package Bancav2;
+
 import Bancav2.conti.*;
 import Bancav2.accountable.*;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Banca {
@@ -62,6 +65,21 @@ public class Banca {
     public boolean changePW(String iban, String pw) {
         Conto tmp = conti.get(iban);
         return tmp instanceof ContoWeb && ((ContoWeb) tmp).changePW(pw);
+    }
+
+    public boolean addAccountable(String iban, TipoAccountable tipo, double amount) {
+        Conto tmp = conti.get(iban);
+        return tmp.addAccountable(tipo, amount);
+    }
+
+    public boolean saldoFineMese() {
+        Iterator it = conti.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            Conto c = (Conto)pair.getValue();
+            c.opFineMese();
+        }
+        return true;
     }
 
 }
