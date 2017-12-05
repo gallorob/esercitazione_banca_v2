@@ -1,5 +1,8 @@
 package Bancav2.conti;
 
+import Bancav2.Eccezioni.CFNotNull;
+import Bancav2.Eccezioni.IllegalOperation;
+import Bancav2.Eccezioni.IllegalWithdrawal;
 import Bancav2.accountable.*;
 
 import java.util.ArrayList;
@@ -31,7 +34,8 @@ public abstract class Conto implements IConto {
     }
 
     public boolean operazione(double amount) {
-        if(amount > 0 || this.saldo >= Math.abs(amount)) {
+        if(this.saldo < Math.abs(amount) && amount < 0) throw new IllegalWithdrawal();
+        if(amount > 0) {
             this.saldo += amount;
             return true;
         } else {

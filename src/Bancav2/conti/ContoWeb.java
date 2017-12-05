@@ -1,5 +1,7 @@
 package Bancav2.conti;
 
+import Bancav2.Eccezioni.PWAlreadyChngd;
+import Bancav2.Eccezioni.PWNotNull;
 import Bancav2.accountable.Accountable;
 import Bancav2.accountable.TipoAccountable;
 
@@ -13,12 +15,13 @@ public class ContoWeb extends ContoCorrente {
     }
 
     public boolean changePW(String newPW) {
-        if(!pwModificata && !(newPW.equals(""))) {
+        if(!pwModificata) {
+            if(newPW.equals("")) throw new PWNotNull();
             this.pw = newPW;
             this.pwModificata = true;
             return true;
         } else {
-            return false;
+            throw new PWAlreadyChngd();
         }
     }
 
@@ -51,7 +54,7 @@ public class ContoWeb extends ContoCorrente {
 
     @Override
     public String toString() {
-        return ("Bancav2.conti.Conto WEB; CF: " + this.getCf() + ";  IBAN: " + this.getIban() + "; Saldo: " + this.getSaldo());
+        return ("Conto WEB; CF: " + this.getCf() + ";  IBAN: " + this.getIban() + "; Saldo: " + this.getSaldo());
     }
 
 }

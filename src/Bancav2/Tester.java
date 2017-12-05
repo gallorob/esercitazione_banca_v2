@@ -95,7 +95,7 @@ public class Tester {
         System.out.println(b.saldoConto("IT00000UBI003"));
 
 
-        // Operazioni sugli accountable
+        // Operazioni sugli accountables
         System.out.println("\n----\nACCOUNTABLES\n----\n");
 
         // Aggiunta accountables

@@ -1,5 +1,8 @@
 package Bancav2;
 
+import Bancav2.Eccezioni.CFNotNull;
+import Bancav2.Eccezioni.IBANNotFound;
+import Bancav2.Eccezioni.MaxContiRaggiunto;
 import Bancav2.conti.*;
 import Bancav2.accountable.*;
 
@@ -23,8 +26,9 @@ public class Banca {
     }
 
     public boolean aggiungiConto(String cf, TipoConto tipo) {
+        if(cf.equals("")) throw new CFNotNull();
         if(numContiAttivi < MAXCONTI) {
-            String iban = radIban + nomeBanca + "00" + (numContiAttivi+1);
+            String iban = radIban + nomeBanca + "00" + (numContiAttivi + 1);
             switch (tipo) {
                 case CORRENTE:
                     conti.put(iban, new ContoCorrente(cf, iban));
@@ -41,28 +45,34 @@ public class Banca {
             numContiAttivi++;
             return true;
         }
-        return false;
+
+        else throw new MaxContiRaggiunto();
     }
 
     public String detConto(String iban) {
+        if(conti.get(iban) == null) throw new IBANNotFound();
         return conti.get(iban).toString();
     }
 
     public double saldoConto(String iban) {
+        if(conti.get(iban) == null) throw new IBANNotFound();
         return conti.get(iban).getSaldo();
     }
 
     public boolean operazione(String iban, double amount) {
+        if(conti.get(iban) == null) throw new IBANNotFound();
         Conto tmp = conti.get(iban);
         return !(tmp instanceof ContoWeb) && tmp.operazione(amount);
     }
 
     public boolean operazione(String iban, double amount, String pw) {
+        if(conti.get(iban) == null) throw new IBANNotFound();
         Conto tmp = conti.get(iban);
         return tmp instanceof ContoWeb && ((ContoWeb) tmp).operazione(amount, pw);
     }
 
     public boolean changePW(String iban, String pw) {
+        if(conti.get(iban) == null) throw new IBANNotFound();
         Conto tmp = conti.get(iban);
         return tmp instanceof ContoWeb && ((ContoWeb) tmp).changePW(pw);
     }

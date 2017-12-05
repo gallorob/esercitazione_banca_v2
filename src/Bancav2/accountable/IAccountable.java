@@ -1,4 +1,4 @@
-package Bancav2;
+package Bancav2.accountable;
 
 public interface IAccountable {
 

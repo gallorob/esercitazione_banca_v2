@@ -15,6 +15,6 @@ public class ContoCorrente extends Conto {
 
     @Override
     public String toString() {
-        return ("Bancav2.conti.Conto Corrente; CF: " + this.getCf() + ";  IBAN: " + this.getIban() + "; Saldo: " + this.getSaldo());
+        return ("Conto Corrente; CF: " + this.getCf() + ";  IBAN: " + this.getIban() + "; Saldo: " + this.getSaldo());
     }
 }

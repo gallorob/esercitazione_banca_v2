@@ -1,5 +1,7 @@
 package Bancav2.conti;
 
+import Bancav2.Eccezioni.IllegalOperation;
+
 public class ContoDeposito extends ContoCorrente {
 
     public ContoDeposito(String cf, String iban) {
@@ -8,12 +10,15 @@ public class ContoDeposito extends ContoCorrente {
 
     @Override
     public boolean operazione(double amount) {
-        return amount >= 0 && super.operazione(amount);
+        if(amount < 0) {
+            throw new IllegalOperation();
+        }
+        else return super.operazione(amount);
     }
 
     @Override
     public String toString() {
-        return ("Bancav2.conti.Conto Deposito; CF: " + this.getCf() + ";  IBAN: " + this.getIban() + "; Saldo: " + this.getSaldo());
+        return ("Conto Deposito; CF: " + this.getCf() + ";  IBAN: " + this.getIban() + "; Saldo: " + this.getSaldo());
     }
 
 }
